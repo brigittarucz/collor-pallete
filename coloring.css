@@ -1,0 +1,12 @@
+#color-picker {
+    height: 250px;
+    width: 200px;
+    background-color: lightblue;
+    margin: 20px;
+    padding: 20px;
+}
+
+#color-picker input {
+    width: 200px;
+    height: 120px;
+}
