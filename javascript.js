@@ -3,6 +3,15 @@ let hexVal = document.querySelector(".hex-value");
 let rgbVal = document.querySelector(".rgb-value");
 let hslVal = document.querySelector(".hsl-value");
 
+let harmonyActions = {
+    "analogous": setAnalogous,
+    "monochromatic": setMonochromatic,
+    "triad": setTriad,
+    "complementary": setComplementary,
+    "compound": setCompound,
+    "shades": setShades
+}
+
 /* Display on change */
 
 hexcodeEl.addEventListener("input", () => {
@@ -89,107 +98,52 @@ function executeHarmony(select, h, s, l) {
     let color3 = document.querySelector(".color3");
     let color4 = document.querySelector(".color4");
     let color5 = document.querySelector(".color5");
-    if (select.value == "analogous") {
-        setAnalogous(h, s, l, color2, color3, color4, color5);
-        console.log("I");
-    } else if (select.value == "monochromatic") {
-        setMonochromatic(h, s, l, color2, color3, color4, color5);
-        console.log("II");
-    } else if (select.value == "triad") {
-        setTriad(h, s, l, color2, color3, color4, color5);
-        console.log("III");
-    } else if (select.value == "complementary") {
-        setComplementary(h, s, l, color2, color3, color4, color5);
-        console.log("IV");
-    } else if (select.value == "compound") {
-        setCompound(h, s, l, color2, color3, color4, color5);
-        console.log("V");
-    } else if (select.value == "shades") {
-        setShades(h, s, l, color2, color3, color4, color5);
-        console.log("VI");
-    }
+
+    harmonyActions[select.value](h, s, l, color2, color3, color4, color5);
 };
 
-/* console.log error - the number of color picks is the number of console.logs per change? */
-
 function setAnalogous(hue, saturation, lightning, color2, color3, color4, color5) {
-
-    let hue2 = hue + 10;
-    let hue3 = hue - 10;
-    color2.style.backgroundColor = `hsl(${hue2}, ${saturation}%, ${lightning}%`;
-    color3.style.backgroundColor = `hsl(${hue3}, ${saturation}%, ${lightning}%`;
-
-    let hue4 = hue + 120;
-    let hue5 = hue - 120;
-    color4.style.backgroundColor = `hsl(${hue4}, ${saturation}%, ${lightning}%`;
-    color5.style.backgroundColor = `hsl(${hue5}, ${saturation}%, ${lightning}%`;
+    color2.style.backgroundColor = `hsl(${hue + 10}, ${saturation}%, ${lightning}%`;
+    color3.style.backgroundColor = `hsl(${hue - 10}, ${saturation}%, ${lightning}%`;
+    color4.style.backgroundColor = `hsl(${hue + 120}, ${saturation}%, ${lightning}%`;
+    color5.style.backgroundColor = `hsl(${hue - 120}, ${saturation}%, ${lightning}%`;
 }
 
-
 function setMonochromatic(hue, saturation, lightning, color2, color3, color4, color5) {
-
-    let lightning2 = lightning + 10;
-    let lightning3 = lightning - 10;
-    let lightning5 = lightning - 20;
-    let lightning4 = lightning + 20;
-
-    color2.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning2}%`;
-    color3.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning3}%`;
-    color4.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning4}%`;
-    color5.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning5}%`;
+    color2.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning + 10}%`;
+    color3.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning - 10}%`;
+    color4.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning + 20}%`;
+    color5.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning - 20}%`;
 }
 
 function setTriad(hue, saturation, lightning, color2, color3, color4, color5) {
-
-    let hue2 = hue + 60;
-    let hue3 = hue - 60;
-
-    let lightning4 = lightning + 20;
-    let lightning5 = lightning - 20;
-
-    color2.style.backgroundColor = `hsl(${hue2}, ${saturation}%, ${lightning}%`;
-    color3.style.backgroundColor = `hsl(${hue3}, ${saturation}%, ${lightning}%`;
-    color4.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning4}%`;
-    color5.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning5}%`;
+    color2.style.backgroundColor = `hsl(${hue + 60}, ${saturation}%, ${lightning}%`;
+    color3.style.backgroundColor = `hsl(${hue - 60}, ${saturation}%, ${lightning}%`;
+    color4.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning + 20}%`;
+    color5.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightning - 20}%`;
 
 }
 
 function setComplementary(hue, saturation, lightning, color2, color3, color4, color5) {
-
-    let hue2 = hue + 180;
-    let saturation3 = saturation + 40;
-    let saturation4 = saturation - 40;
-    let saturation5 = saturation - 100;
-
-    color2.style.backgroundColor = `hsl(${hue2}, ${saturation}%, ${lightning}%`;
-    color3.style.backgroundColor = `hsl(${hue}, ${saturation3}%, ${lightning}%`;
-    color4.style.backgroundColor = `hsl(${hue}, ${saturation4}%, ${lightning}%`;
-    color5.style.backgroundColor = `hsl(${hue}, ${saturation5}%, ${lightning}%`;
+    color2.style.backgroundColor = `hsl(${hue + 180}, ${saturation}%, ${lightning}%`;
+    color3.style.backgroundColor = `hsl(${hue}, ${saturation + 40}%, ${lightning}%`;
+    color4.style.backgroundColor = `hsl(${hue}, ${saturation - 40}%, ${lightning}%`;
+    color5.style.backgroundColor = `hsl(${hue}, ${saturation - 100}%, ${lightning}%`;
 }
 
 function setCompound(hue, saturation, lightning, color2, color3, color4, color5) {
-
-    let hue2 = hue + 180;
-    let hue3 = hue - 40;
-    let hue4 = hue + 60;
-    let hue5 = hue - 20;
-
-    color2.style.backgroundColor = `hsl(${hue2}, ${saturation}%, ${lightning}%`;
-    color3.style.backgroundColor = `hsl(${hue3}, ${saturation}%, ${lightning}%`;
-    color4.style.backgroundColor = `hsl(${hue4}, ${saturation}%, ${lightning}%`;
-    color5.style.backgroundColor = `hsl(${hue5}, ${saturation}%, ${lightning}%`;
+    color2.style.backgroundColor = `hsl(${hue + 180}, ${saturation}%, ${lightning}%`;
+    color3.style.backgroundColor = `hsl(${hue - 40}, ${saturation}%, ${lightning}%`;
+    color4.style.backgroundColor = `hsl(${hue + 60}, ${saturation}%, ${lightning}%`;
+    color5.style.backgroundColor = `hsl(${hue - 20}, ${saturation}%, ${lightning}%`;
 
 }
 
 function setShades(hue, saturation, lightning, color2, color3, color4, color5) {
-
-    let saturation2 = saturation + 15;
-    let saturation3 = saturation - 15;
-    let saturation4 = saturation - 30;
-    let saturation5 = saturation + 30;
-
-    color2.style.backgroundColor = `hsl(${hue}, ${saturation2}%, ${lightning}%`;
-    color3.style.backgroundColor = `hsl(${hue}, ${saturation3}%, ${lightning}%`;
-    color4.style.backgroundColor = `hsl(${hue}, ${saturation4}%, ${lightning}%`;
-    color5.style.backgroundColor = `hsl(${hue}, ${saturation5}%, ${lightning}%`;
+    color2.style.backgroundColor = `hsl(${hue}, ${saturation + 15}%, ${lightning}%`;
+    color3.style.backgroundColor = `hsl(${hue}, ${saturation - 15}%, ${lightning}%`;
+    color4.style.backgroundColor = `hsl(${hue}, ${saturation - 30}%, ${lightning}%`;
+    color5.style.backgroundColor = `hsl(${hue}, ${saturation + 30}%, ${lightning}%`;
 }
+
+/* How can I manage to modify on select input based on this code? */

@@ -12,7 +12,7 @@
     <div class="wrapper">
 
         <label id="harmony-picker">
-            <h2> Pick desired harmony: </h2>
+            <h2> First pick desired harmony: </h2>
             <select name="color-harmony-base">
                 <option value="analogous"> Analogous </option>
                 <option value="monochromatic"> Monochromatic </option>
@@ -24,10 +24,14 @@
         </label>
 
         <div id="color-picker">
+            <h2> Then select a color: </h2>
             <input type="color" class="color-picker" value="#A24DC6">
             <p> HEX: <span class="hex-value"> </span> </p>
             <p> RGB: <span class="rgb-value"> </span> </p>
             <p> HSL: <span class="hsl-value"> </span> </p>
+            <p class="hidden"> H: <span class="hue-value"> </span> </p>
+            <p class="hidden"> S: <span class="sat-value"> </span> </p>
+            <p class="hidden"> L: <span class="lig-value"> </span> </p>
         </div>
 
         <div id="color-pallete">
