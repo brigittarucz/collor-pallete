@@ -1,8 +1,11 @@
+"use strict"
+
 let hexcodeEl = document.querySelector(".color-picker");
 let hexVal = document.querySelector(".hex-value");
 let rgbVal = document.querySelector(".rgb-value");
 let hslVal = document.querySelector(".hsl-value");
-
+let select = document.querySelector("select");
+let bgCol = document.querySelector("body");
 let harmonyActions = {
     "analogous": setAnalogous,
     "monochromatic": setMonochromatic,
@@ -12,21 +15,18 @@ let harmonyActions = {
     "shades": setShades
 }
 
-/* Display on change */
+window.onload = createPallete;
 
-hexcodeEl.addEventListener("input", () => {
-    hexcode = hexcodeEl.value;
+hexcodeEl.addEventListener("input", createPallete);
+
+select.addEventListener("click", createPallete);
+
+function createPallete() {
+    let hexcode = hexcodeEl.value;
     hexVal.textContent = hexcode.toUpperCase();
     hexToRGB(hexcode);
     document.querySelector(".base-color").style.backgroundColor = hexcode;
-});
-
-/* Display on load */
-
-hexcode = hexcodeEl.value;
-hexVal.textContent = hexcode.toUpperCase();
-hexToRGB(hexcode);
-document.querySelector(".base-color").style.backgroundColor = hexcode
+}
 
 function hexToRGB(value) {
     let cut2 = value.substring(1, 3);
@@ -83,14 +83,7 @@ function rgbToHSL(r, g, b) {
 
     hslVal.textContent = `(${h},${s}%,${l}%)`;
 
-    listenHarmony(h, s, l);
-
-}
-
-function listenHarmony(h, s, l) {
-    let select = document.querySelector("select");
-    select.addEventListener("click", executeHarmony(select, h, s, l))
-    select.removeEventListener("click", executeHarmony(select, h, s, l));
+    executeHarmony(select, h, s, l);
 }
 
 function executeHarmony(select, h, s, l) {
@@ -100,6 +93,7 @@ function executeHarmony(select, h, s, l) {
     let color5 = document.querySelector(".color5");
 
     harmonyActions[select.value](h, s, l, color2, color3, color4, color5);
+    document.querySelector("body").style.background = `linear-gradient(45deg, ${color2.style.backgroundColor} 0%, ${color3.style.backgroundColor} 30%, ${color4.style.backgroundColor} 72%, ${color5.style.backgroundColor} 82%, ${color5.style.backgroundColor} 100%)`;
 };
 
 function setAnalogous(hue, saturation, lightning, color2, color3, color4, color5) {
